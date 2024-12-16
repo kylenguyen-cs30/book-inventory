@@ -1,17 +1,19 @@
 from pydantic import BaseModel
 
 
-# Base Model of all books
+# Base Schema that defines common attributes for all book-related schemas
 class BookBase(BaseModel):
     title: str
     author: str
     published_year: int
 
 
+# Schema for creating a new book
 class BookCreate(BookBase):
     isbn: str
 
 
+# Schema for updating a book
 class BookUpdate(BookBase):
     isbn: str | None = None
     title: str | None = None
@@ -19,7 +21,7 @@ class BookUpdate(BookBase):
     published_year: int | None = None
 
 
-# a book use base model from BookBase
+# Schema for returning book data - adds id field and configures ORM mode
 class Book(BookBase):
     id: int
     isbn: str
